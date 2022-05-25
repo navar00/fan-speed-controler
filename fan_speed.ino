@@ -1,25 +1,14 @@
-#define FANc 10
-#define P2 A2 // Potenciometro
-#define TAC 7
-
+#include <Math.h>
 #define PI 3.1415926535897932384626433832795
-
-volatile long pulseCount = 0;
-unsigned long RPMv = 0;
-unsigned long lastTime = millis();
-
-int Hz2RPM = 60;
-int pulsesBYrev = 2;
 
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#include <Math.h>
 
 #define SCREEN_WIDTH 128 // OLED display width,  in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
-// declare an SSD1306 display object connected to I2C
+//Declare an SSD1306 display object connected to I2C
 Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
 #define USE_TIMER_3     true
@@ -29,6 +18,19 @@ Adafruit_SSD1306 oled(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 #define TIMER_INTERVAL_500MS        500L
 #define TIMER_INTERVAL_1000MS      1000L
 ISR_Timer ISR_timer;
+
+//HW pin definition
+#define FANc 10 //PWM
+#define P2 A2   //Potenciometro
+#define TAC 7   //Tachometer
+
+//Global var
+volatile long pulseCount = 0;
+unsigned long RPMv = 0;
+unsigned long lastTime = millis();
+
+int Hz2RPM = 60;
+int pulsesBYrev = 2;
 
 void setup() {
   // put your setup code here, to run once:
